@@ -1,0 +1,53 @@
+<div class="card card-outline-danger">
+    <div class="card-body">
+		<div class="card border border-2">
+            <div class="card-header ">
+                D. Consultar saldo
+            </div>
+            <div class="card-body">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="numCuenta"
+ 							#corporation
+                            (change)="onChange($any($event.target).value)">
+                                <option value="" selected>Seleccione una opcion</option>
+                                <option *ngFor="let item of listaCuentas" value="{{ item.CUENTANUM }}">{{ item.CUENTANUM }}</option>
+                            </select>
+                            <label for="numCuenta">1. Numero de cuenta *</label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="loading">
+                	<br>
+                	<div class="alert alert-primary" role="alert">
+						<b>Datos de la cuenta</b>
+					</div>
+                	<ol class="list-group list-group-numbered">
+					  <li class="list-group-item">Nombre de la persona: {{ nomCuenta }}</li>
+					  <li class="list-group-item">Valor inicial de la cuenta: {{ valorInicial | currency: 'USD' | lowercase }} </li>
+					  <li class="list-group-item">Valor actual de la cuenta: {{ valorActual | currency: 'USD' | lowercase }}</li>
+					</ol>
+					<br>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Tipo Tramite</th>
+								<th scope="col">Valor</th>
+								<th scope="col">Fecha tramite</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of historial">
+								<td>{{ item.TIPOT }}</td>
+								<td>{{ item.VALOR | currency: 'USD' | lowercase }} </td>
+								<td>{{ item.FECHA }}</td>
+							</tr>
+						</tbody>
+					</table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
